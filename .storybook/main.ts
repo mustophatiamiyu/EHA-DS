@@ -25,7 +25,7 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return {
       ...config,
-      base: './', // Ensure assets load correctly on GitHub Pages
+      base: '/EHA-DS/', // GitHub Pages serves from /repo-name/ path
     };
   },
 };
