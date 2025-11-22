@@ -22,12 +22,6 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     check: false,
   },
-  async viteFinal(config) {
-    return {
-      ...config,
-      base: '/EHA-DS/', // GitHub Pages serves from /repo-name/ path
-    };
-  },
 };
 
 export default config;
