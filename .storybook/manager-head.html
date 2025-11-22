@@ -1,0 +1,165 @@
+<style>
+    /* ============================================
+       CUSTOM LOGO
+       ============================================ */
+  
+    /* Hide Storybook default logo 
+    .sidebar-header img,
+    [data-test-id="sidebar-header"] img,
+    .css-1wa1zh6 img,
+    .sidebar-svg-icon {
+      display: none !important;
+    } */
+  
+    /* Hide default text branding 
+    .sidebar-header::before,
+    [data-test-id="sidebar-header"]::before {
+      display: none !important;
+    } */
+  
+    /* Add your custom logo */
+    .sidebar-header,
+    [data-test-id="sidebar-header"] {
+      background-image: url('./.storybook/EHA-Logo-INV.png') !important; /* or './logo.png' */
+      background-repeat: no-repeat !important;
+      background-size: 200px auto !important; /* Adjust size as needed */
+      height: 80px !important;
+      background-position: 20px center !important;
+
+    }
+
+    /* Hide any default branding */
+    .sidebar-header > div,
+    [data-test-id="sidebar-header"] > div {
+      display: none;
+    }
+  
+    /* ============================================
+       MENU FONT COLORS
+       ============================================ */
+  
+    /* Default menu item text color */
+    [data-nodetype="story"],
+    [data-nodetype="component"],
+    [data-nodetype="root"],
+    [data-nodetype="group"],
+    .sidebar-item,
+    [role="menuitem"] {
+      color: #fff !important; /* Change this to your preferred color */
+    }
+  
+    /* Menu item hover color */
+    [data-nodetype="story"]:hover,
+    [data-nodetype="component"]:hover,
+    [role="menuitem"]:hover {
+      color: #fff !important; /* Change this to your preferred hover color */
+      background-color:#0060A8 !important;
+    }
+  
+    /* Active/Selected menu item color */
+    [data-selected="true"],
+    [aria-selected="true"],
+    [data-nodetype="story"][data-selected="true"],
+    [data-nodetype="component"][data-selected="true"] {
+      color: #fff !important; /* Change this to your preferred active color */
+      background-color: #0060A8 !important;
+      font-weight: 600;
+    }
+  
+    /* Active item left border indicator */
+    [data-selected="true"]::before,
+    [aria-selected="true"]::before {
+      background-color: #fff !important; /* Match your active color */
+    }
+  
+    /* Category/Group titles (Introduction, RSuite, etc.) */
+    [data-nodetype="root"] > div,
+    [data-nodetype="group"] > div {
+      color: #fff !important; /* Darker color for category headers */
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+  
+    /* Nested items (indented) */
+    [data-nodetype="story"][data-depth="2"],
+    [data-nodetype="component"][data-depth="2"] {
+      color: #fff !important; /* Slightly lighter for nested items */
+    }
+  
+    /* ============================================
+       SIDEBAR BACKGROUND
+       ============================================ */
+  
+    .sidebar-container,
+    [data-side="left"] {
+      background: #0078D2 !important; /* Change sidebar background */
+      border-right: 1px solid #0078D2;
+    }
+  
+    /* ============================================
+       TOOLBAR STYLING
+       ============================================ */
+  
+    /* Active toolbar tab */
+    [role="tab"][aria-selected="true"],
+    button[data-selected="true"] {
+      color: #fff !important;
+      border-bottom-color: #fff !important;
+    }
+  
+    /* Toolbar text color */
+    [role="tab"],
+    .sidebar-header button {
+      color: #fff !important;
+    }
+  
+    /* Toolbar hover */
+    [role="tab"]:hover,
+    .sidebar-header button:hover {
+      color: #fff !important;
+    }
+  
+    /* ============================================
+       SEARCH BAR
+       ============================================ */
+  
+    input[type="search"],
+    input[placeholder*="Find"] {
+      color: #fff !important;
+      border-color: #fafafa !important;
+    }
+  
+    input[type="search"]:focus,
+    input[placeholder*="Find"]:focus {
+      border-color: #fff !important;
+      outline-color: #fff !important;
+    }
+  
+    input[type="search"]::placeholder,
+    input[placeholder*="Find"]::placeholder {
+      color: #fff !important;
+    }
+  
+    /* ============================================
+       CUSTOM SCROLLBAR
+       ============================================ */
+  
+    .sidebar-container ::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-thumb:hover {
+      background: #3498ff;
+    }
+  </style>

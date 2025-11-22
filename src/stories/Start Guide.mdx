@@ -1,0 +1,263 @@
+<Meta title="Start Guide" />
+
+import {  Meta, Story, Canvas, Primary, Controls } from '@storybook/addon-docs/blocks';
+
+# Developer Guide
+
+Welcome to the EHA Design System! This guide will help you get started with developing, testing, and deploying components.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your machine:
+
+- **Node.js** (v18 or higher) - [Download Node.js](https://nodejs.org/)
+- **npm** (v9 or higher) or **yarn** (v1.22 or higher)
+- **Git** - [Download Git](https://git-scm.com/)
+
+To verify your installations:
+
+```bash
+node --version   # Should show v18.x.x or higher
+npm --version    # Should show 9.x.x or higher
+git --version    # Should show 2.x.x or higher
+```
+
+---
+
+## Getting Started
+
+### Step 1: Clone the Repository
+
+Clone the EHA Design System repository to your local machine:
+
+```bash
+# Using HTTPS
+git clone https://github.com/eha/EHA-design-system.git
+
+# OR using SSH (if you have SSH keys set up)
+git clone git@github.com:eha/EHA-design-system.git
+
+# Navigate into the project directory
+cd EHA-design-system
+```
+
+---
+
+### Step 2: Install Dependencies
+
+Install all project dependencies using npm or yarn:
+
+```bash
+# Using npm
+npm install
+
+# OR using yarn
+yarn install
+```
+
+This will install all the packages listed in `package.json`, including:
+- React and React DOM
+- RSuite component library
+- Storybook and its dependencies
+- TypeScript and type definitions
+- Build tools and utilities
+
+---
+
+### Step 3: Install Global Dependencies
+
+Some tools are recommended to be installed globally for better development experience:
+
+#### Storybook CLI (Optional but Recommended)
+
+```bash
+npm install -g storybook
+```
+
+This allows you to use Storybook commands from anywhere and helps with troubleshooting.
+
+---
+
+## Development Workflow
+
+### Starting Storybook
+
+Storybook is the main development environment for the EHA Design System. It allows you to:
+- View all components in isolation
+- Test different component states
+- Interact with component props
+- Read component documentation
+
+#### Start the Development Server
+
+```bash
+# Using npm
+npm run storybook
+
+# OR using yarn
+yarn storybook
+```
+
+---
+
+## Project Structure
+
+Understanding the project structure will help you navigate and contribute effectively:
+
+```
+EHA-design-system/
+│
+├── src/                          # Source code
+│   ├── components/               # Component library
+│   │   ├── Accordion/
+│   │   │   ├── Panel.tsx         # Component implementation
+│   │   │   ├── PanelGroup.tsx
+│   │   │   ├── index.ts          # Component exports
+│   │   │   └── Accordion.stories.tsx  # Storybook stories
+│   │   │
+│   │   ├── Button/
+│   │   ├── Checkbox/
+│   │   ├── Breadcrumb/
+│   │   └── Dropdown/
+│   │
+│   ├── stories/                  # Additional documentation
+│   │   ├── Introduction.mdx
+│   │   ├── icons.mdx
+│   │   └── ...
+│   │
+│   ├── theme/                    # Design tokens and theme configuration
+│   │   ├── design-tokens.ts      # Design tokens (colors, spacing, etc.)
+│   │   └── rsuite-theme.tsx      # RSuite theme provider
+│   │
+│   ├── index.css                 # Global styles (fonts, resets)
+│   └── index.ts                  # Main entry point (exports all components)
+│
+├── .storybook/                   # Storybook configuration
+│   ├── main.ts                   # Main Storybook config
+│   ├── preview.tsx               # Global decorators and parameters
+│
+├── public/                       # Static assets
+├── dist/                         # Build output (generated)
+│
+├── package.json                  # Project dependencies
+├── tsconfig.json                 # TypeScript configuration
+└── vite.config.ts                # Vite build configuration
+```
+
+---
+
+## Global Styles & Theming
+
+The design system uses **Manrope** as the primary font family. This is configured in `src/theme/design-tokens.ts` and imported via `src/index.css`.
+
+When creating stories or using components, ensure they are wrapped in the `ThemeProvider` (exported from `src/theme/rsuite-theme.tsx`) to apply the correct RSuite theme and design tokens.
+
+---
+
+## Common Development Tasks
+
+### Creating a New Component
+
+1. **Create the component directory:**
+   ```bash
+   mkdir -p src/components/YourComponent
+   ```
+
+2. **Create the component file:**
+   ```tsx
+   // src/components/YourComponent/YourComponent.tsx
+   import React from 'react';
+   import { YourComponent as RSuiteYourComponent } from 'rsuite';
+   import { designTokens } from '../../theme/design-tokens';
+
+   export interface YourComponentProps {
+     // Define props
+   }
+
+   export const YourComponent: React.FC<YourComponentProps> = (props) => {
+     return <RSuiteYourComponent {...props} />;
+   };
+   ```
+
+3. **Create the index file:**
+   ```tsx
+   // src/components/YourComponent/index.ts
+   export { YourComponent } from './YourComponent';
+   export type { YourComponentProps } from './YourComponent';
+   ```
+
+4. **Create the stories file:**
+   ```tsx
+   // src/components/YourComponent/YourComponent.stories.tsx
+   import type { Meta, StoryObj } from '@storybook/react';
+   import { YourComponent } from './index';
+
+   const meta: Meta<typeof YourComponent> = {
+     title: 'Components/YourComponent',
+     component: YourComponent,
+     tags: ['autodocs'],
+   };
+
+   export default meta;
+   type Story = StoryObj<typeof meta>;
+
+   export const Basic: Story = {
+     args: {
+       // Default props
+     },
+   };
+   ```
+
+5. **Export from main index:**
+   ```tsx
+   // src/index.ts
+   export { YourComponent } from './components/YourComponent';
+   export type { YourComponentProps } from './components/YourComponent';
+   ```
+
+---
+
+## Building the Project
+
+### Development Build
+
+```bash
+npm run build
+```
+
+This creates a production-ready build in the `dist/` directory.
+
+**Output:**
+- `dist/index.js` - Compiled JavaScript
+- `dist/index.d.ts` - TypeScript definitions
+- `dist/components/` - Individual component builds
+
+---
+
+### Building Storybook (Static)
+
+To build a static version of Storybook for deployment:
+
+```bash
+npm run build-storybook
+```
+
+This creates a static website in `storybook-static/` that can be deployed to any static hosting service.
+
+---
+
+### Reporting Issues
+
+When reporting issues, please include:
+1. Steps to reproduce
+2. Expected behavior
+3. Actual behavior
+4. Screenshots (if applicable)
+5. Your environment (OS, Node version, npm version)
+
+
+---
+
+*Last updated: November 2025*

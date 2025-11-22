@@ -1,0 +1,112 @@
+import {
+  Meta,
+  Story,
+  Canvas,
+  Primary,
+  Controls,
+} from "@storybook/addon-docs/blocks";
+
+<Meta title="Style Guide/Icons" />
+
+# Icons
+
+Our design system uses two primary icon libraries to provide a comprehensive set of icons for all use cases: **Google Material Icons** and **Phosphor Icons**.
+
+## Icon Libraries
+
+### Google Material Icons
+
+Material Icons are Google's official icon set, offering over 2,000+ icons across various categories. These icons follow Material Design guidelines and are available in multiple styles.
+
+**Styles Available:**
+
+- Filled (default)
+- Outlined
+- Rounded
+- Sharp
+- Two-tone
+
+**Installation:**
+
+```bash
+npm install @mui/icons-material @mui/material @emotion/react @emotion/styled
+```
+
+or
+
+```bash
+yarn add @mui/icons-material @mui/material @emotion/react @emotion/styled
+```
+
+**Resources:**
+
+- [Browse Material Icons](https://mui.com/material-ui/material-icons/)
+- [Material Icons Documentation](https://mui.com/material-ui/icons/)
+- [GitHub Repository](https://github.com/mui/material-ui/tree/master/packages/mui-icons-material)
+
+**Usage Example:**
+
+```jsx
+import HomeIcon from "@mui/icons-material/Home";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+
+function MyComponent() {
+  return (
+    <>
+      <HomeIcon />
+      <HomeOutlinedIcon />
+      <HomeRoundedIcon fontSize="large" color="primary" />
+    </>
+  );
+}
+```
+
+---
+
+### Phosphor Icons
+
+Phosphor is a flexible icon family with over 9,000+ icons designed for interfaces, diagrams, presentations, and more. Each icon is available in six weights, providing excellent design flexibility.
+
+**Weights Available:**
+
+- Thin
+- Light
+- Regular (default)
+- Bold
+- Fill
+- Duotone
+
+**Installation:**
+
+```bash
+npm install @phosphor-icons/react
+```
+
+or
+
+```bash
+yarn add @phosphor-icons/react
+```
+
+**Resources:**
+
+- [Browse Phosphor Icons](https://phosphoricons.com/)
+- [Phosphor React Documentation](https://github.com/phosphor-icons/react)
+- [GitHub Repository](https://github.com/phosphor-icons/react)
+
+**Usage Example:**
+
+```jsx
+import { House, HouseLine, Heart } from "@phosphor-icons/react";
+
+function MyComponent() {
+  return (
+    <>
+      <House size={24} />
+      <HouseLine size={32} weight="bold" />
+      <Heart size={32} weight="fill" color="#e74c3c" />
+    </>
+  );
+}
+```
