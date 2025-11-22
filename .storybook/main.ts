@@ -22,6 +22,16 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     check: false,
   },
+  async viteFinal(config) {
+    return {
+      ...config,
+      base: '/EHA-DS/',
+      build: {
+        ...config.build,
+        assetsDir: 'assets',
+      },
+    };
+  },
 };
 
 export default config;
