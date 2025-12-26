@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
+  staticDirs: ['../src/stories/assets'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -21,16 +22,6 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     check: false,
-  },
-  async viteFinal(config) {
-    return {
-      ...config,
-      base: '/EHA-DS/',
-      build: {
-        ...config.build,
-        assetsDir: 'assets',
-      },
-    };
   },
 };
 
