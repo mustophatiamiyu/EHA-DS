@@ -6,7 +6,8 @@ import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
 import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import Logo from '../../stories/assets/EHA-Logo-INV.png';
+// Logo is served from staticDirs (src/stories/assets)
+const Logo = './EHA-Logo-INV.png';
 
 const meta: Meta<typeof Sidenav> = {
     title: 'Components/Sidenav',
