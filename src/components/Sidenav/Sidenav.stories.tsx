@@ -6,8 +6,8 @@ import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
 import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-// Logo is served from staticDirs (src/stories/assets) at the root
-const Logo = 'EHA-Logo-INV.png';
+// Vite will bundle this image and handle the path correctly
+import Logo from '../../stories/assets/EHA-Logo-INV.png';
 
 const meta: Meta<typeof Sidenav> = {
     title: 'Components/Sidenav',
