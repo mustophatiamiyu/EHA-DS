@@ -28,7 +28,8 @@ const AvatarComponent = ({
 
     const customStyle: React.CSSProperties = {
         ...style,
-        // Custom styles if needed
+        backgroundColor: designTokens.colors.primary20,
+        color: designTokens.colors.primary60,
     };
 
     return (

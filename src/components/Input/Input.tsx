@@ -35,15 +35,15 @@ export const Input: React.FC<InputProps> = ({
   className,
   ...props
 }) => {
-  
+
   // Get token-based styles
   const tokenStyles: React.CSSProperties = {
     fontFamily: designTokens.fontFamily.body,
     fontSize: designTokens.inputTokens.sizes[size].fontSize,
     height: designTokens.inputTokens.sizes[size].height,
     // padding: designTokens.inputTokens.sizes[size].padding, // RSuite Input handles padding internally usually, but we might need to override
-    borderRadius: designTokens.borderRadius.md,
-    borderColor: error ? designTokens.semanticColors.border.error : designTokens.semanticColors.border.default,
+    borderRadius: designTokens.borderRadius.button,
+    borderColor: error ? designTokens.semanticColors.border.error : designTokens.colors.neutral30,
     width: fullWidth ? '100%' : 'auto',
   };
 
@@ -67,18 +67,49 @@ export const Input: React.FC<InputProps> = ({
     fontSize: designTokens.fontSize.xs,
     color: error ? designTokens.semanticColors.text.primary : designTokens.semanticColors.text.secondary, // Error text usually red, but let's stick to tokens
   };
-  
+
   // If error, override helper color
   if (error) {
-      helperStyle.color = designTokens.semanticColors.feedback.error;
+    helperStyle.color = designTokens.semanticColors.feedback.error;
   }
 
   return (
     <div style={containerStyle} className={className}>
+      <style>{`
+        /* Override RSuite Input placeholder */
+        .ds-input::-webkit-input-placeholder {
+            font-size: ${designTokens.fontSize.sm} !important;
+            color: ${designTokens.colors.neutral40};
+        }
+        .ds-input::-moz-placeholder {
+            font-size: ${designTokens.fontSize.sm} !important;
+            color: ${designTokens.colors.neutral40};
+        }
+        .ds-input:-ms-input-placeholder {
+            font-size: ${designTokens.fontSize.sm} !important;
+            color: ${designTokens.colors.neutral40};
+        }
+        .ds-input::placeholder {
+            font-size: ${designTokens.fontSize.sm} !important;
+            color: ${designTokens.colors.neutral40};
+        }
+        /* Override RSuite default border color to ensure neutral30 applies */
+        .ds-input.rs-input {
+            border-color: ${error ? designTokens.semanticColors.border.error : designTokens.colors.neutral30};
+        }
+        .ds-input.rs-input:hover {
+            border-color: ${error ? designTokens.semanticColors.border.error : designTokens.semanticColors.border.hover};
+        }
+        .ds-input.rs-input:focus {
+             border-color: ${designTokens.semanticColors.border.focus};
+        }
+
+      `}</style>
       {label && <label style={labelStyle}>{label}</label>}
       <RSuiteInput
         size={size}
         style={{ ...tokenStyles, ...style }}
+        className={`ds-input ${className || ''}`}
         {...props}
       />
       {error && <span style={helperStyle}>{error}</span>}

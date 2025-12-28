@@ -26,7 +26,7 @@ export interface ModalProps extends RSuiteModalProps {
  *   </Modal.Footer>
  * </Modal>
  */
-export const Modal = ({
+const ModalBase = ({
     size = 'md',
     style,
     className,
@@ -58,9 +58,18 @@ export const ModalFooter = RSuiteModal.Footer;
 export const ModalTitle = RSuiteModal.Title;
 
 // Attach to Modal for dot notation
-(Modal as any).Header = ModalHeader;
-(Modal as any).Body = ModalBody;
-(Modal as any).Footer = ModalFooter;
-(Modal as any).Title = ModalTitle;
+const ModalComponent = ModalBase as typeof ModalBase & {
+    Header: typeof ModalHeader;
+    Body: typeof ModalBody;
+    Footer: typeof ModalFooter;
+    Title: typeof ModalTitle;
+};
 
-Modal.displayName = 'Modal';
+(ModalComponent as any).Header = ModalHeader;
+(ModalComponent as any).Body = ModalBody;
+(ModalComponent as any).Footer = ModalFooter;
+(ModalComponent as any).Title = ModalTitle;
+
+(ModalComponent as any).displayName = 'Modal';
+
+export { ModalComponent as Modal };

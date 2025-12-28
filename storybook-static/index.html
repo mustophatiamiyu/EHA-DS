@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>@storybook/core - Storybook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    
+    <style>
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-regular.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-italic.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Nunito Sans';
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./sb-common-assets/nunito-sans-bold-italic.woff2') format('woff2');
+      }
+    </style>
+
+    <link href="./sb-manager/runtime.js" rel="modulepreload" />
+
+    
+    <link href="./sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/links-1/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-controls-2/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-actions-3/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-docs-4/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-backgrounds-5/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-viewport-6/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-toolbars-7/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-measure-8/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/essentials-outline-9/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/interactions-10/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/a11y-11/manager-bundle.js" rel="modulepreload" />
+      <style>
+    /* ============================================
+       CUSTOM LOGO
+       ============================================ */
+  
+    /* Hide Storybook default logo 
+    .sidebar-header img,
+    [data-test-id="sidebar-header"] img,
+    .css-1wa1zh6 img,
+    .sidebar-svg-icon {
+      display: none !important;
+    } */
+  
+    /* Hide default text branding 
+    .sidebar-header::before,
+    [data-test-id="sidebar-header"]::before {
+      display: none !important;
+    } */
+  
+    /* Add your custom logo */
+    .sidebar-header,
+    [data-test-id="sidebar-header"] {
+      background-image: url('./.storybook/EHA-Logo-INV.png') !important; /* or './logo.png' */
+      background-repeat: no-repeat !important;
+      background-size: 200px auto !important; /* Adjust size as needed */
+      height: 80px !important;
+      background-position: 20px center !important;
+
+    }
+
+    /* Hide any default branding */
+    .sidebar-header > div,
+    [data-test-id="sidebar-header"] > div {
+      display: none;
+    }
+  
+    /* ============================================
+       MENU FONT COLORS
+       ============================================ */
+  
+    /* Default menu item text color */
+    [data-nodetype="story"],
+    [data-nodetype="component"],
+    [data-nodetype="root"],
+    [data-nodetype="group"],
+    .sidebar-item,
+    [role="menuitem"] {
+      color: #fff !important; /* Change this to your preferred color */
+    }
+  
+    /* Menu item hover color */
+    [data-nodetype="story"]:hover,
+    [data-nodetype="component"]:hover,
+    [role="menuitem"]:hover {
+      color: #fff !important; /* Change this to your preferred hover color */
+      background-color:#0060A8 !important;
+    }
+  
+    /* Active/Selected menu item color */
+    [data-selected="true"],
+    [aria-selected="true"],
+    [data-nodetype="story"][data-selected="true"],
+    [data-nodetype="component"][data-selected="true"] {
+      color: #fff !important; /* Change this to your preferred active color */
+      background-color: #0060A8 !important;
+      font-weight: 600;
+    }
+  
+    /* Active item left border indicator */
+    [data-selected="true"]::before,
+    [aria-selected="true"]::before {
+      background-color: #fff !important; /* Match your active color */
+    }
+  
+    /* Category/Group titles (Introduction, RSuite, etc.) */
+    [data-nodetype="root"] > div,
+    [data-nodetype="group"] > div {
+      color: #fff !important; /* Darker color for category headers */
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+  
+    /* Nested items (indented) */
+    [data-nodetype="story"][data-depth="2"],
+    [data-nodetype="component"][data-depth="2"] {
+      color: #fff !important; /* Slightly lighter for nested items */
+    }
+  
+    /* ============================================
+       SIDEBAR BACKGROUND
+       ============================================ */
+  
+    .sidebar-container,
+    [data-side="left"] {
+      background: #0078D2 !important; /* Change sidebar background */
+      border-right: 1px solid #0078D2;
+    }
+  
+    /* ============================================
+       TOOLBAR STYLING
+       ============================================ */
+  
+    /* Active toolbar tab */
+    [role="tab"][aria-selected="true"],
+    button[data-selected="true"] {
+      color: #fff !important;
+      border-bottom-color: #fff !important;
+    }
+  
+    /* Toolbar text color */
+    [role="tab"],
+    .sidebar-header button {
+      color: #fff !important;
+    }
+  
+    /* Toolbar hover */
+    [role="tab"]:hover,
+    .sidebar-header button:hover {
+      color: #fff !important;
+    }
+  
+    /* ============================================
+       SEARCH BAR
+       ============================================ */
+  
+    input[type="search"],
+    input[placeholder*="Find"] {
+      color: #fff !important;
+      border-color: #fafafa !important;
+    }
+  
+    input[type="search"]:focus,
+    input[placeholder*="Find"]:focus {
+      border-color: #fff !important;
+      outline-color: #fff !important;
+    }
+  
+    input[type="search"]::placeholder,
+    input[placeholder*="Find"]::placeholder {
+      color: #fff !important;
+    }
+  
+    /* ============================================
+       CUSTOM SCROLLBAR
+       ============================================ */
+  
+    .sidebar-container ::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+  
+    .sidebar-container ::-webkit-scrollbar-thumb:hover {
+      background: #3498ff;
+    }
+  </style> 
+
+    <style>
+      #storybook-root[hidden] {
+        display: none !important;
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    <div id="root"></div>
+
+    
+    <script>
+      
+        
+          window['FEATURES'] = {
+  "argTypeTargetsV7": true,
+  "legacyDecoratorFileOrder": false,
+  "disallowImplicitActionsInRenderV8": true
+};
+        
+      
+        
+          window['REFS'] = {};
+        
+      
+        
+          window['LOGLEVEL'] = "info";
+        
+      
+        
+          window['DOCS_OPTIONS'] = {
+  "defaultName": "Docs",
+  "autodocs": true
+};
+        
+      
+        
+          window['CONFIG_TYPE'] = "PRODUCTION";
+        
+      
+        
+      
+        
+      
+        
+          window['TAGS_OPTIONS'] = {
+  "dev-only": {
+    "excludeFromDocsStories": true
+  },
+  "docs-only": {
+    "excludeFromSidebar": true
+  },
+  "test-only": {
+    "excludeFromSidebar": true,
+    "excludeFromDocsStories": true
+  }
+};
+        
+      
+        
+          window['STORYBOOK_RENDERER'] = "react";
+        
+      
+        
+          window['STORYBOOK_BUILDER'] = "@storybook/builder-vite";
+        
+      
+        
+          window['STORYBOOK_FRAMEWORK'] = "@storybook/react-vite";
+        
+      
+    </script>
+    
+
+    <script type="module">
+      import './sb-manager/globals-runtime.js';
+      
+      
+        import './sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js';
+      
+        import './sb-addons/links-1/manager-bundle.js';
+      
+        import './sb-addons/essentials-controls-2/manager-bundle.js';
+      
+        import './sb-addons/essentials-actions-3/manager-bundle.js';
+      
+        import './sb-addons/essentials-docs-4/manager-bundle.js';
+      
+        import './sb-addons/essentials-backgrounds-5/manager-bundle.js';
+      
+        import './sb-addons/essentials-viewport-6/manager-bundle.js';
+      
+        import './sb-addons/essentials-toolbars-7/manager-bundle.js';
+      
+        import './sb-addons/essentials-measure-8/manager-bundle.js';
+      
+        import './sb-addons/essentials-outline-9/manager-bundle.js';
+      
+        import './sb-addons/interactions-10/manager-bundle.js';
+      
+        import './sb-addons/a11y-11/manager-bundle.js';
+      
+      
+      import './sb-manager/runtime.js';
+    </script>
+  </body>
+</html>

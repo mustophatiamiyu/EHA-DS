@@ -2,13 +2,13 @@
 import React from 'react';
 import { Sidenav as RSuiteSidenav, Nav, SidenavProps as RSuiteSidenavProps } from 'rsuite';
 import { designTokens } from '../../theme/design-tokens';
-import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
-import GroupIcon from '@rsuite/icons/legacy/Group';
-import MagicIcon from '@rsuite/icons/legacy/Magic';
-import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import AngleLeftIcon from '@rsuite/icons/legacy/AngleLeft';
-import AngleRightIcon from '@rsuite/icons/legacy/AngleRight';
-import HelpOutlineIcon from '@rsuite/icons/HelpOutline';
+import HolidayVillageOutlinedIcon from '@mui/icons-material/HolidayVillageOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined'; import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+import EhaIcon from '../../stories/assets/EHA-ICON.svg';
 
 export interface SidenavItem {
     eventKey: string;
@@ -28,22 +28,32 @@ export interface SidenavProps extends Omit<RSuiteSidenavProps, 'onSelect'> {
     onSelect?: (eventKey: string | number | undefined, event: React.SyntheticEvent) => void;
     /** URL or path to the logo image */
     logo?: string;
+    /** Height of the logo in pixels */
+    logoHeight?: number;
+    /** Color of the menu text */
+    menuTextColor?: string;
+    /** Font size of main menu items */
+    menuFontSize?: number | string;
+    /** Font size of sub-menu items */
+    subMenuFontSize?: number | string;
+    /** Size of icons */
+    iconSize?: number | string;
     /** List of navigation items (optional, can use children instead) */
     items?: SidenavItem[];
 }
 
-/**
- * Custom Sidenav Component
- * 
- * A design system-ready sidenav that wraps RSuite Sidenav.
- * Matches the specific blue design with white text.
- */
+
 export const SidenavComponent = ({
     expanded = true,
     onToggle,
     activeKey,
     onSelect,
     logo,
+    logoHeight = 60,
+    menuTextColor = designTokens.colors.white,
+    menuFontSize = designTokens.fontSize.sm,
+    subMenuFontSize = designTokens.fontSize.sm,
+    iconSize = 18,
     items,
     style,
     className,
@@ -51,12 +61,11 @@ export const SidenavComponent = ({
     ...props
 }: SidenavProps) => {
 
-    // Custom styles to match the design
     const sidenavStyle: React.CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        backgroundColor: designTokens.colors.primary40, // Blue background
+        backgroundColor: designTokens.colors.primary40,
         color: designTokens.colors.white,
         width: expanded ? 260 : 56,
         transition: `width ${designTokens.transitionDuration.normal} ${designTokens.transitionTiming.easeInOut}`,
@@ -64,28 +73,25 @@ export const SidenavComponent = ({
     };
 
     const headerStyle: React.CSSProperties = {
-        padding: expanded ? '20px' : '20px 10px',
+        padding: expanded ? '16px 24px' : '0 10px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: expanded ? 'flex-start' : 'center',
         height: 80,
-        borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
-        marginBottom: 10,
     };
 
     const logoStyle: React.CSSProperties = {
-        height: 40,
+        height: logoHeight,
         maxWidth: '100%',
         objectFit: 'contain',
         display: expanded ? 'block' : 'none',
     };
 
     const smallLogoStyle: React.CSSProperties = {
-        height: 30,
-        width: 30,
+        height: 32,
+        width: 32,
         display: expanded ? 'none' : 'block',
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        borderRadius: '50%',
+        objectFit: 'contain',
     }
 
     const footerStyle: React.CSSProperties = {
@@ -102,9 +108,9 @@ export const SidenavComponent = ({
                     <Nav.Menu
                         key={item.eventKey}
                         eventKey={item.eventKey}
-                        title={item.title}
+                        title={expanded ? item.title : ''}
                         icon={item.icon}
-                        style={{ color: 'white' }} // Override RSuite default
+                        style={{ color: 'white' }}
                     >
                         {renderItems(item.children)}
                     </Nav.Menu>
@@ -116,18 +122,18 @@ export const SidenavComponent = ({
                     eventKey={item.eventKey}
                     icon={item.icon}
                 >
-                    {item.title}
+                    {expanded ? item.title : ''}
                 </Nav.Item>
             );
         });
     };
 
     return (
-        <div style={sidenavStyle} className={`ds-sidenav ${className || ''}`}>
+        <div style={sidenavStyle} className={`ds-sidenav ${!expanded ? 'collapsed' : ''} ${className || ''}`}>
             {/* Header / Logo */}
             <div style={headerStyle}>
-                {logo && <img src={logo} alt="Logo" style={logoStyle} />}
-                {logo && !expanded && <div style={smallLogoStyle} />}
+                {logo && expanded && <img src={logo} alt="Logo" style={logoStyle} />}
+                {!expanded && <img src={EhaIcon} alt="Small Logo" style={smallLogoStyle} />}
             </div>
 
             {/* Body / Navigation */}
@@ -150,46 +156,97 @@ export const SidenavComponent = ({
             </div>
 
             {/* Footer / Help & Toggle */}
-            <div style={footerStyle}>
+            <div style={footerStyle} className="ds-sidenav-footer">
                 <Nav vertical>
                     <Nav.Item
                         eventKey="help"
-                        icon={<HelpOutlineIcon />}
-                        style={{ color: 'white' }}
+                        icon={<HelpOutlineOutlinedIcon />}
+                        style={{ color: designTokens.colors.white }}
                     >
                         {expanded ? 'Help & Support' : ''}
                     </Nav.Item>
                 </Nav>
                 <div
                     style={{
-                        padding: '10px 20px',
+                        padding: expanded ? '10px 20px' : '10px 0',
                         cursor: 'pointer',
                         display: 'flex',
                         justifyContent: expanded ? 'flex-end' : 'center',
-                        color: 'white'
+                        color: 'white',
                     }}
                     onClick={() => onToggle?.(!expanded)}
                 >
-                    {expanded ? <AngleLeftIcon /> : <AngleRightIcon />}
+                    {expanded ? <KeyboardArrowLeftOutlinedIcon /> : <KeyboardArrowRightOutlinedIcon />}
                 </div>
             </div>
 
-            {/* Global overrides for this component instance to force white text */}
+            {/* Global overrides for this component instance to force white text and custom sizing */}
             <style>{`
         .ds-sidenav .rs-sidenav-item,
-        .ds-sidenav .rs-dropdown-item-content,
-        .ds-sidenav .rs-sidenav-toggle-button {
-            color: rgba(255, 255, 255, 0.8) !important;
+        .ds-sidenav .rs-sidenav-toggle-button,
+        .ds-sidenav .rs-nav-item {
+            color: ${menuTextColor} !important;
+            font-size: ${typeof menuFontSize === 'number' ? `${menuFontSize}px` : menuFontSize} !important;
+            display: flex !important;
+            align-items: center !important;
+            padding-left: 24px !important;
+            gap: 18px !important;
         }
+        .ds-sidenav .rs-nav-item-icon {
+            margin-right: 0 !important;
+        }
+        .ds-sidenav .rs-dropdown-item {
+            color: ${designTokens.colors.white} !important;
+            background-color: transparent !important;
+            padding-left: 65px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 18px !important;
+        }
+        .ds-sidenav .rs-dropdown-item-content {
+            color: ${designTokens.colors.white} !important;
+            font-size: ${typeof subMenuFontSize === 'number' ? `${subMenuFontSize}px` : subMenuFontSize} !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 18px !important;
+        }
+        .ds-sidenav .rs-nav-sub,
+        .ds-sidenav .rs-dropdown-menu {
+            background-color: ${designTokens.colors.primary50} !important;
+        }
+        /* Hover and Active states */
         .ds-sidenav .rs-sidenav-item:hover,
-        .ds-sidenav .rs-dropdown-item-content:hover,
+        .ds-sidenav .rs-dropdown-item:hover,
+        .ds-sidenav .rs-dropdown-item:hover > .rs-dropdown-item-content,
         .ds-sidenav .rs-sidenav-item-active,
-        .ds-sidenav .rs-dropdown-item-content-active {
-            color: #fff !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
+        .ds-sidenav .rs-nav-item-active > .rs-sidenav-item-content,
+        .ds-sidenav .rs-dropdown-item-active,
+        .ds-sidenav .rs-dropdown-item-active > .rs-dropdown-item-content {
+            color: ${designTokens.colors.white} !important;
+            background-color: ${designTokens.colors.primary50} !important;
+            opacity: 1 !important;
         }
-        .ds-sidenav .rs-icon {
-            color: inherit !important;
+        .ds-sidenav.collapsed .rs-sidenav-item,
+        .ds-sidenav.collapsed .rs-sidenav-toggle-button,
+        .ds-sidenav.collapsed .rs-nav-item {
+            padding: 0 !important;
+            justify-content: center !important;
+            gap: 0 !important;
+        }
+        .ds-sidenav.collapsed .rs-icon,
+        .ds-sidenav.collapsed svg {
+            margin: 0 !important;
+        }
+        .ds-sidenav.collapsed .rs-dropdown-item {
+            padding: 0 !important;
+            justify-content: center !important;
+        }
+        /* Footer refinements */
+        .ds-sidenav-footer .rs-nav-item {
+            background-color: transparent !important;
+        }
+        .ds-sidenav-footer .rs-nav-item:hover {
+            background-color: ${designTokens.colors.primary50} !important;
         }
       `}</style>
         </div>

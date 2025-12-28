@@ -2,9 +2,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { MetricCard } from './MetricCard';
-import PeoplesIcon from '@rsuite/icons/Peoples';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CheckRoundIcon from '@rsuite/icons/CheckRound';
-import CloseOutlineIcon from '@rsuite/icons/CloseOutline';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 const meta: Meta<typeof MetricCard> = {
     title: 'Components/MetricCard',
@@ -42,7 +43,7 @@ export const CompactWithIcon: Story = {
     args: {
         value: '2,420',
         label: 'Metric Name',
-        icon: <PeoplesIcon />,
+        icon: <AccountCircleOutlinedIcon />,
         variant: 'compact',
     },
 };
@@ -82,21 +83,22 @@ export const GridLayout: Story = {
             <MetricCard
                 value="2,420"
                 label="Total Users"
-                icon={<PeoplesIcon />}
+                icon={<AccountCircleOutlinedIcon />}
             />
             <MetricCard
-                value="230"
-                label="Failed"
+                value="2,140"
+                label="Active Sessions"
+                icon={<AssessmentIcon />}
+            />
+            <MetricCard
+                value="12.5%"
+                label="Growth Rate"
+                icon={<TrendingUpIcon />}
             />
             <MetricCard
                 value="1,890"
                 label="Completed"
                 icon={<CheckRoundIcon />}
-            />
-            <MetricCard
-                value="300"
-                label="Pending"
-                icon={<CloseOutlineIcon />}
             />
         </div>
     ),

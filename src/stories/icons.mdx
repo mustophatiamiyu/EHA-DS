@@ -1,112 +1,71 @@
-import {
-  Meta,
-  Story,
-  Canvas,
-  Primary,
-  Controls,
-} from "@storybook/addon-docs/blocks";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Style Guide/Icons" />
 
 # Icons
 
-Our design system uses two primary icon libraries to provide a comprehensive set of icons for all use cases: **Google Material Icons** and **Phosphor Icons**.
+The EHA Design System uses **Google Material Icons** as its primary icon library. This provides a comprehensive set of over 2,000+ industry-standard icons that are well-documented and widely recognized.
 
-## Icon Libraries
+## Primary Library: Google Material Icons
 
-### Google Material Icons
+Material Icons follow the Material Design guidelines and are available as high-quality SVG React components via the `@mui/icons-material` package.
 
-Material Icons are Google's official icon set, offering over 2,000+ icons across various categories. These icons follow Material Design guidelines and are available in multiple styles.
+### Why Material Icons?
 
-**Styles Available:**
+- **Consistency**: Used across countless applications, making them familiar to users.
+- **Variety**: Over 2,000 icons in multiple styles (Filled, Outlined, Rounded, etc.).
+- **Performance**: Supports tree-shaking; only the icons you use are bundled.
+- **Ease of Use**: Imported directly as React components.
 
-- Filled (default)
-- Outlined
-- Rounded
-- Sharp
-- Two-tone
+### Usage in EHA-DS
 
-**Installation:**
+Icons can be passed to various components such as `Button`, `MetricCard`, and `Sidenav`. They automatically inherit styles when used within these components, but can also be customized individually.
 
-```bash
-npm install @mui/icons-material @mui/material @emotion/react @emotion/styled
+#### 1. Basic Import
+
+```tsx
+import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 ```
 
-or
+#### 2. Usage in Components
 
-```bash
-yarn add @mui/icons-material @mui/material @emotion/react @emotion/styled
+**MetricCard Example:**
+
+```tsx
+<MetricCard 
+    value="2,140" 
+    label="Active Sessions" 
+    icon={<AssessmentIcon />} 
+/>
 ```
 
-**Resources:**
+**Sidenav Example:**
 
-- [Browse Material Icons](https://mui.com/material-ui/material-icons/)
-- [Material Icons Documentation](https://mui.com/material-ui/icons/)
-- [GitHub Repository](https://github.com/mui/material-ui/tree/master/packages/mui-icons-material)
+```tsx
+const items = [
+    { eventKey: '1', title: 'Dashboard', icon: <HomeIcon /> },
+    { eventKey: '2', title: 'Settings', icon: <SettingsIcon /> },
+];
 
-**Usage Example:**
-
-```jsx
-import HomeIcon from "@mui/icons-material/Home";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-
-function MyComponent() {
-  return (
-    <>
-      <HomeIcon />
-      <HomeOutlinedIcon />
-      <HomeRoundedIcon fontSize="large" color="primary" />
-    </>
-  );
-}
+<Sidenav items={items} />
 ```
 
----
+### Styling Icons
 
-### Phosphor Icons
+While EHA-DS components handle most styling, you can manually style icons using standard React props:
 
-Phosphor is a flexible icon family with over 9,000+ icons designed for interfaces, diagrams, presentations, and more. Each icon is available in six weights, providing excellent design flexibility.
+- **color**: Use `primary`, `secondary`, `action`, `error`, `disabled`, or `inherit`.
+- **fontSize**: Use `small`, `medium` (default), `large`, or a custom value via `sx` or `style`.
+- **style / sx**: For custom CSS properties like `color: designTokens.colors.primary50`.
 
-**Weights Available:**
-
-- Thin
-- Light
-- Regular (default)
-- Bold
-- Fill
-- Duotone
-
-**Installation:**
-
-```bash
-npm install @phosphor-icons/react
+```tsx
+<HomeIcon color="primary" fontSize="large" />
+<SettingsIcon style={{ color: '#0052CC' }} />
 ```
 
-or
+### Resources
 
-```bash
-yarn add @phosphor-icons/react
-```
-
-**Resources:**
-
-- [Browse Phosphor Icons](https://phosphoricons.com/)
-- [Phosphor React Documentation](https://github.com/phosphor-icons/react)
-- [GitHub Repository](https://github.com/phosphor-icons/react)
-
-**Usage Example:**
-
-```jsx
-import { House, HouseLine, Heart } from "@phosphor-icons/react";
-
-function MyComponent() {
-  return (
-    <>
-      <House size={24} />
-      <HouseLine size={32} weight="bold" />
-      <Heart size={32} weight="fill" color="#e74c3c" />
-    </>
-  );
-}
-```
+- [Browse All Material Icons](https://mui.com/material-ui/material-icons/)
+- [Material Icons API Documentation](https://mui.com/material-ui/icons/)

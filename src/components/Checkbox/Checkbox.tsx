@@ -27,7 +27,7 @@ export const Checkbox = ({
         ...style,
         // Add any specific overrides if needed, though RSuite handles most via theme variables
         // We can enforce font sizes here if needed
-        fontSize: designTokens.fontSize[size],
+        fontSize: designTokens.fontSize.sm,
     };
 
     return (

@@ -336,7 +336,6 @@ export function getButtonStyles(
       bgHover: 'transparent',
       bgActive: 'transparent',
       color: colors.neutral60,
-      border: `1px solid ${colors.neutral60}`,
     },
 
     error: {
@@ -360,16 +359,16 @@ export function getButtonStyles(
   };
 
   const sizeMap = {
-    xs: { height: '24px', padding: '0 8px', fontSize: fontSize.xs },
+    xs: { height: '24px', padding: '0 8px', fontSize: fontSize.sm },
     sm: { height: '32px', padding: '0 12px', fontSize: fontSize.sm },
-    md: { height: '40px', padding: '0 16px', fontSize: fontSize.md },
-    lg: { height: '48px', padding: '0 20px', fontSize: fontSize.lg },
+    md: { height: '40px', padding: '0 16px', fontSize: fontSize.sm },
+    lg: { height: '48px', padding: '0 20px', fontSize: fontSize.sm },
   };
 
   return {
     ...variantColorMap[variant],
     ...sizeMap[size],
-    borderRadius: borderRadius.md,
+    borderRadius: borderRadius.button,
   };
 }
 

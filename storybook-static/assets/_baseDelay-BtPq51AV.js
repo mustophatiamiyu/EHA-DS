@@ -1,0 +1,1 @@
+var e,a;function o(){if(a)return e;a=1;var n="Expected a function";function t(r,i,u){if(typeof r!="function")throw new TypeError(n);return setTimeout(function(){r.apply(void 0,u)},i)}return e=t,e}export{o as r};

@@ -92,3 +92,7 @@ export type { TagProps } from './components/Tag';
 
 // Re-export RSuite utilities that developers might need
 export { CustomProvider } from 'rsuite';
+
+// Theme Utilities
+export { ThemeProvider, applyRSuiteTheme } from './theme/rsuite-theme';
+export { designTokens } from './theme/design-tokens';

@@ -38,30 +38,3 @@ export const Default: Story = {
     ),
 };
 
-// Custom Separator
-export const CustomSeparator: Story = {
-    args: {
-        separator: '>',
-    },
-    render: (args) => (
-        <Breadcrumb {...args}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Components</Breadcrumb.Item>
-            <Breadcrumb.Item active>Breadcrumb</Breadcrumb.Item>
-        </Breadcrumb>
-    ),
-};
-
-// With Icon Separator
-export const IconSeparator: Story = {
-    args: {
-        separator: <AngleRightIcon />,
-    },
-    render: (args) => (
-        <Breadcrumb {...args}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Components</Breadcrumb.Item>
-            <Breadcrumb.Item active>Breadcrumb</Breadcrumb.Item>
-        </Breadcrumb>
-    ),
-};

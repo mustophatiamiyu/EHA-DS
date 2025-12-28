@@ -1,0 +1,1 @@
+var a=Object.prototype.hasOwnProperty;function l(r,e){return r===e?r!==0||e!==0||1/r===1/e:r!==r&&e!==e}function f(r,e){if(l(r,e))return!0;if(typeof r!="object"||r===null||typeof e!="object"||e===null)return!1;var t=Object.keys(r),u=Object.keys(e);if(t.length!==u.length)return!1;for(var n=0;n<t.length;n+=1)if(!a.call(e,t[n])||!l(r[t[n]],e[t[n]]))return!1;return!0}export{f as s};

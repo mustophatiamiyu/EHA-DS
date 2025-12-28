@@ -255,7 +255,7 @@ export const fontSize = {
   lg: '18px',
   xl: '20px',
   '2xl': '24px',
-  '3xl': '30px',
+  '3xl': '32px',
   '4xl': '36px',
   '5xl': '48px',
 } as const;
@@ -289,8 +289,9 @@ export const lineHeight = {
  */
 export const borderRadius = {
   none: '0',
-  sm: '2px',
-  md: '4px',
+  xs: '2px',
+  sm: '4px',
+  md: '6px',
   lg: '8px',
   xl: '12px',
   '2xl': '16px',
@@ -389,6 +390,11 @@ export const buttonTokens = {
  */
 export const inputTokens = {
   sizes: {
+    xs: {
+      height: '24px',
+      padding: '0 8px',
+      fontSize: fontSize.xs,
+    },
     sm: {
       height: '32px',
       padding: '0 12px',

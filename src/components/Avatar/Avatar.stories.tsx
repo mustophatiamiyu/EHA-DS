@@ -2,7 +2,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Avatar } from './Avatar';
-import UserIcon from '@rsuite/icons/legacy/User';
 
 const meta: Meta<typeof Avatar> = {
     title: 'Components/Avatar',
@@ -49,23 +48,6 @@ export const Default: Story = {
     },
 };
 
-// With Image
-export const WithImage: Story = {
-    args: {
-        src: 'https://avatars.githubusercontent.com/u/12592949',
-        circle: true,
-        size: 'md',
-    },
-};
-
-// With Icon
-export const WithIcon: Story = {
-    args: {
-        icon: <UserIcon />,
-        circle: true,
-        size: 'md',
-    },
-};
 
 // Sizes
 export const Sizes: Story = {

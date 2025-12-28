@@ -38,7 +38,6 @@ export const Notification = React.forwardRef<HTMLDivElement, NotificationProps>(
     const customStyle: React.CSSProperties = {
         ...style,
         borderRadius: designTokens.borderRadius.md,
-        boxShadow: designTokens.shadows.lg,
         // We could override background colors here based on type if the theme doesn't cover it fully
     };
 

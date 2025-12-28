@@ -32,6 +32,16 @@ const DropdownComponent = ({
             className={`ds-dropdown ${className || ''}`}
             {...props}
         >
+            <style>{`
+                .ds-dropdown .rs-dropdown-toggle {
+                    background-color: ${designTokens.colors.white} !important;
+                    color: ${designTokens.colors.neutral50} !important;
+                    border: 1px solid ${designTokens.colors.neutral20};
+                }
+                .ds-dropdown .rs-dropdown-toggle:hover {
+                   background-color: ${designTokens.colors.neutral10} !important;
+                }
+            `}</style>
             {children}
         </RSuiteDropdown>
     );

@@ -59,10 +59,13 @@ export const MetricCard = ({
 
     const cardStyle: React.CSSProperties = {
         backgroundColor: designTokens.colors.white,
-        borderRadius: designTokens.borderRadius.md,
-        padding: variant === 'compact' ? '24px' : '32px',
+        borderRadius: designTokens.borderRadius.xl,
+        padding: '24px',
         boxShadow: designTokens.shadows.sm,
         border: `1px solid ${designTokens.colors.neutral20}`,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
         ...style,
     };
 
@@ -70,26 +73,31 @@ export const MetricCard = ({
         width: 64,
         height: 64,
         borderRadius: '50%',
-        backgroundColor: designTokens.colors.primary10,
+        backgroundColor: designTokens.colors.tertiary10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 16,
         color: designTokens.colors.primary50,
         fontSize: 28,
+        flexShrink: 0,
+    };
+
+    const contentStyle: React.CSSProperties = {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
     };
 
     const valueStyle: React.CSSProperties = {
-        fontSize: variant === 'compact' ? '36px' : '48px',
+        fontSize: variant === 'compact' ? designTokens.fontSize['3xl'] : '48px',
         fontWeight: designTokens.fontWeight.bold,
         color: designTokens.colors.neutral60,
         lineHeight: 1.2,
-        marginBottom: 8,
     };
 
     const labelStyle: React.CSSProperties = {
-        fontSize: designTokens.fontSize.md,
-        color: designTokens.colors.neutral60,
+        fontSize: designTokens.fontSize.sm,
+        color: designTokens.colors.neutral50,
         fontWeight: designTokens.fontWeight.regular,
     };
 
@@ -97,6 +105,8 @@ export const MetricCard = ({
         display: 'flex',
         gap: '32px',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
     };
 
     const dividerStyle: React.CSSProperties = {
@@ -112,16 +122,24 @@ export const MetricCard = ({
     };
 
     const breakdownItemStyle: React.CSSProperties = {
-        fontSize: designTokens.fontSize.md,
+        fontSize: designTokens.fontSize.sm,
         color: designTokens.colors.neutral60,
         fontWeight: designTokens.fontWeight.regular,
     };
 
     if (variant === 'detailed' && breakdown) {
+        // ... detailed view implementation (kept largely same but with updated styles if needed)
+        // For detailed view, layout might differ. User request implied general layout or compact?
+        // "Numbers and Icon should be horizontally lined" usually refers to the main view.
+        // Detailed view has breakdown content. 
+        // I will focus updates on non-detailed (compact) first as per generic request, 
+        // but ensure values/labels use new tokens everywhere given "Subtitle font size..." requirement.
+
+        // Updating detailed view styles too for consistency
         return (
-            <div style={cardStyle} className={`ds-metric-card ds-metric-card--detailed ${className || ''}`}>
+            <div style={{ ...cardStyle, display: 'block', padding: '32px' }} className={`ds-metric-card ds-metric-card--detailed ${className || ''}`}>
                 <div style={breakdownContainerStyle}>
-                    <div>
+                    <div style={{ marginRight: 'auto' }}>
                         <div style={valueStyle}>{value}</div>
                         <div style={labelStyle}>{label}</div>
                     </div>
@@ -145,8 +163,10 @@ export const MetricCard = ({
                     {icon}
                 </div>
             )}
-            <div style={valueStyle}>{value}</div>
-            <div style={labelStyle}>{label}</div>
+            <div style={contentStyle}>
+                <div style={valueStyle}>{value}</div>
+                <div style={labelStyle}>{label}</div>
+            </div>
         </div>
     );
 };

@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Dropdown } from './Dropdown';
 import { designTokens } from '../../theme/design-tokens';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const meta: Meta<typeof Dropdown> = {
     title: 'Components/Dropdown',
@@ -59,10 +62,10 @@ export const Default: Story = {
 export const WithIcons: Story = {
     render: () => (
         <Dropdown title="User Menu">
-            <Dropdown.Item icon={<span style={{ marginRight: 8 }}>👤</span>}>Profile</Dropdown.Item>
-            <Dropdown.Item icon={<span style={{ marginRight: 8 }}>⚙️</span>}>Settings</Dropdown.Item>
+            <Dropdown.Item icon={<PersonOutlineIcon style={{ fontSize: 20, marginRight: 8 }} />}>Profile</Dropdown.Item>
+            <Dropdown.Item icon={<SettingsOutlinedIcon style={{ fontSize: 20, marginRight: 8 }} />}>Settings</Dropdown.Item>
             <Dropdown.Item divider />
-            <Dropdown.Item icon={<span style={{ marginRight: 8 }}>🚪</span>}>Logout</Dropdown.Item>
+            <Dropdown.Item icon={<LogoutOutlinedIcon style={{ fontSize: 20, marginRight: 8 }} />}>Logout</Dropdown.Item>
         </Dropdown>
     ),
 };

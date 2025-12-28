@@ -29,12 +29,19 @@ export const Loader = ({
     };
 
     return (
-        <RSuiteLoader
-            size={size}
-            style={customStyle}
-            className={`ds-loader ds-loader--${size} ${className || ''}`}
-            {...props}
-        />
+        <div className={`ds-loader-wrapper ${className || ''}`} style={customStyle}>
+            <style>{`
+                .ds-loader .rs-loader-spin:after {
+                    border-color: ${designTokens.colors.primary40} !important;
+                    border-top-color: transparent !important;
+                }
+            `}</style>
+            <RSuiteLoader
+                size={size}
+                className={`ds-loader ds-loader--${size}`}
+                {...props}
+            />
+        </div>
     );
 };
 

@@ -8,11 +8,6 @@ export interface AccordionProps extends RSuiteAccordionProps {
     bordered?: boolean;
 }
 
-export interface AccordionProps extends RSuiteAccordionProps {
-    /** Whether to show a border around the accordion */
-    bordered?: boolean;
-}
-
 const AccordionComponent = ({
     bordered = false,
     style,
@@ -22,17 +17,32 @@ const AccordionComponent = ({
     const customStyle: React.CSSProperties = {
         ...style,
         borderRadius: designTokens.borderRadius.md,
-        border: bordered ? `1px solid ${designTokens.semanticColors.border.default}` : 'none',
-        backgroundColor: designTokens.semanticColors.background.primary,
+        border: bordered ? `1px solid ${designTokens.colors.neutral20}` : 'none',
+        backgroundColor: designTokens.colors.white,
     };
 
     return (
-        <RSuiteAccordion
-            bordered={bordered}
-            style={customStyle}
-            className={`ds-accordion ${className || ''}`}
-            {...props}
-        />
+        <div className={`ds-accordion-wrapper ${className || ''}`} style={customStyle}>
+            <style>{`
+                .ds-accordion.rs-panel-group-bordered {
+                    border: none !important;
+                }
+                .ds-accordion .rs-panel-btn span {
+                    color: ${designTokens.colors.neutral60} !important;
+                }
+                .ds-accordion .rs-panel-body p {
+                    color: ${designTokens.colors.neutral50} !important;
+                }
+                .ds-accordion .rs-panel-btn:hover {
+                    background-color: transparent !important;
+                }
+            `}</style>
+            <RSuiteAccordion
+                bordered={bordered}
+                className="ds-accordion"
+                {...props}
+            />
+        </div>
     );
 };
 

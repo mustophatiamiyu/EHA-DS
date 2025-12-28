@@ -2,6 +2,7 @@
 import React from 'react';
 import { DatePicker as RSuiteDatePicker, DatePickerProps as RSuiteDatePickerProps } from 'rsuite';
 import { designTokens } from '../../theme/design-tokens';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 
 export interface DatePickerProps extends RSuiteDatePickerProps {
     /** Size of the date picker */
@@ -22,7 +23,7 @@ export interface DatePickerProps extends RSuiteDatePickerProps {
  * @example
  * <DatePicker size="md" placeholder="Select Date" />
  */
-export const DatePicker = ({
+const DatePickerComponent = ({
     size = 'md',
     label,
     helperText,
@@ -43,7 +44,7 @@ export const DatePicker = ({
         marginBottom: designTokens.spacing.xs,
         fontSize: designTokens.fontSize.sm,
         fontWeight: designTokens.fontWeight.medium,
-        color: designTokens.semanticColors.text.primary,
+        color: designTokens.colors.neutral60,
     };
 
     const helperStyle: React.CSSProperties = {
@@ -55,16 +56,30 @@ export const DatePicker = ({
 
     const customStyle: React.CSSProperties = {
         ...style,
-        // RSuite DatePicker handles most styles, but we can inject overrides if needed via class or style
-        // For example, border radius is usually handled by theme variables we set in rsuite-theme.tsx
     };
 
     return (
         <div style={containerStyle} className={className}>
+            <style>{`
+                .ds-datepicker .rs-picker-toggle.rs-btn {
+                    border-color: ${designTokens.colors.neutral20} !important;
+                }
+                .ds-datepicker .rs-picker-toggle.rs-btn:hover {
+                    border-color: ${designTokens.colors.primary50} !important;
+                }
+                .ds-datepicker .rs-picker-toggle-placeholder {
+                    color: ${designTokens.colors.neutral40} !important;
+                }
+                /* Ensure value text color is standard when selected */
+                .ds-datepicker .rs-picker-toggle-value {
+                    color: ${designTokens.colors.neutral60} !important;
+                }
+            `}</style>
             {label && <label style={labelStyle}>{label}</label>}
             <RSuiteDatePicker
                 size={size}
                 style={customStyle}
+                caretAs={CalendarMonthOutlinedIcon}
                 className={`ds-datepicker ds-datepicker--${size} ${error ? 'ds-datepicker--error' : ''}`}
                 {...props}
             />
@@ -74,4 +89,6 @@ export const DatePicker = ({
     );
 };
 
-DatePicker.displayName = 'DatePicker';
+DatePickerComponent.displayName = 'DatePicker';
+
+export const DatePicker = DatePickerComponent;

@@ -1,0 +1,1 @@
+import{r as o}from"./index-BF9HgEP8.js";import{u as c}from"./useIsomorphicLayoutEffect-B5gjKS-z.js";function l(a){var u=o.useRef(a);return c(function(){u.current=a}),o.useCallback(function(){for(var r,e=arguments.length,n=new Array(e),t=0;t<e;t++)n[t]=arguments[t];return(r=u.current)===null||r===void 0?void 0:r.call.apply(r,[u].concat(n))},[])}export{l as u};
